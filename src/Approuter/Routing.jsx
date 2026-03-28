@@ -24,7 +24,7 @@ import Welcome from '../Author/Welcome'
 // Admin
 import AdminDashboard from '../Admin/Dashboard'
 import AdminWelcome from '../Admin/AdminWelcome'
-import Blogs from '../Admin/blogs'
+import Blogs from '../Admin/Blogs'
 import CreateBlog from '../Admin/CreateBlog'
 import FilterBlog from '../Admin/FilterBlog'
 import ManageAuthors from '../Admin/ManageAuthors'
