@@ -1,0 +1,77 @@
+.navbar {
+  background: linear-gradient(90deg, #4b6cb7, #182848);
+  color: white;
+}
+.nav-link{
+  color: white;
+}
+.card img{
+    height: 250px;
+    object-fit: cover;
+}
+.hover-scale {
+transition: transform 0.3s;
+}
+.hover-scale:hover {
+  transform: translateY(-5px) scale(1.03);
+}
+.dashboard{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+aside{
+  width: 20%;
+  height: 100%;
+  background-color: black;
+}
+.content{
+  width: 80%;
+  height: 100%;
+  overflow-y: scroll;
+}
+.myBtn{
+  width: 200px;
+  height: 50px;
+  margin: 30px;
+}
+.myDash{
+  width: 100%;
+  height: 100vh;
+}
+.myAside{
+  width: 20%;
+  height: 100%;
+  background-color: black;
+}
+.context{
+  width: 80%;
+  height: 100%;
+  overflow-y: scroll;
+}
+.myBtns{
+  width: 200px;
+  height: 50px;
+  margin: 10px;
+}
+@media  (max-width:600px) {
+  .dashboard{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  aside{
+    width: 100%;
+    height: 100%;
+  }
+  .content{
+    width:100%;
+    height: 100%;
+  }
+}
