@@ -116,7 +116,7 @@ const Welcome = () => {
                 {/* ✅ FIX IMAGE PATH */}
                 {blog.image && (
                   <img
-                    src={`http://localhost:5173${blog.image}`}
+                    src={`https://quillhub-backend-latest-2.onrender.com${blog.image}`}
                     alt={blog.title}
                     className="card-img-top"
                     style={{ height: "150px", objectFit: "cover" }}
