@@ -7,28 +7,21 @@ const AuthorDashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // ✅ If not logged in
     if (!login?.status) {
       navigate("/login");
-    }
-    // ✅ If admin tries to access author dashboard
-    else if (login?.user?.role === "admin") {
+    } else if (login?.user?.role === "admin") {
       navigate("/admin/dashboard");
     }
   }, [login, navigate]);
 
-  // ✅ Prevent crash + blank UI
   if (!login?.status || !login?.user) {
     return <h3 className="text-center mt-5">Loading...</h3>;
   }
 
   return (
     <section className="dashboard">
-
-      {/* SIDEBAR */}
-      <aside>
-        <ul className="list-unstyled">
-
+      <aside className="authorSidebar">
+        <ul className="list-unstyled mb-0">
           <li>
             <Link to="">
               <button className="btn btn-warning myBtn">
@@ -39,7 +32,7 @@ const AuthorDashboard = () => {
 
           <li>
             <Link to="myblogs">
-              <button className="btn btn-warning myBtn ">
+              <button className="btn btn-warning myBtn">
                 My Blogs
               </button>
             </Link>
@@ -47,7 +40,7 @@ const AuthorDashboard = () => {
 
           <li>
             <Link to="addblog">
-              <button className="btn btn-warning myBtn ">
+              <button className="btn btn-warning myBtn">
                 Add Blog
               </button>
             </Link>
@@ -55,7 +48,7 @@ const AuthorDashboard = () => {
 
           <li>
             <Link to="authorblogs">
-              <button className="btn btn-warning myBtn ">
+              <button className="btn btn-warning myBtn">
                 Author Blogs
               </button>
             </Link>
@@ -63,20 +56,17 @@ const AuthorDashboard = () => {
 
           <li>
             <Link to="comments">
-              <button className="btn btn-warning myBtn ">
+              <button className="btn btn-warning myBtn">
                 Comments
               </button>
             </Link>
           </li>
-
         </ul>
       </aside>
 
-      {/* MAIN CONTENT */}
       <div className="content">
         <Outlet />
       </div>
-
     </section>
   );
 };
