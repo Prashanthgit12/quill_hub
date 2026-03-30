@@ -1,47 +1,45 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false);
+
+  const validateEmail = (value) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  };
 
   const handleSubscribe = () => {
-    if (!email) {
-      setMessage("Please enter your email!");
+    if (!email.trim()) {
+      setMessage("Please enter your email");
       return;
     }
 
-    setLoading(true);
-    setMessage("");
+    if (!validateEmail(email)) {
+      setMessage("Please enter a valid email address");
+      return;
+    }
 
-    axios.post("http://localhost:8080/api/subscribe", { email })
-      .then(res => {
-        setMessage(res.data);
-        setEmail("");
-      })
-      .catch(err => {
-        setMessage(err.response?.data || "Something went wrong");
-      })
-      .finally(() => setLoading(false));
+    setMessage("Subscribed successfully");
+    setEmail("");
   };
 
   return (
     <footer className="bg-dark text-light pt-5">
       <div className="container">
         <div className="row">
-
-          {/* ================= BRAND / LOGO ================= */}
           <div className="col-md-3 mb-4">
             <h3 className="fw-bold mb-3">
-              <i className="bi bi-lightning-charge-fill me-2 text-warning"></i>QuillHub
+              <i className="bi bi-lightning-charge-fill me-2 text-warning"></i>
+              QuillHub
             </h3>
-            <p>Learn, explore, and build with our curated blogs on tech, programming, design, and business.</p>
+            <p>
+              Learn, explore, and build with our curated blogs on tech,
+              programming, design, and business.
+            </p>
           </div>
 
-          {/* ================= QUICK LINKS ================= */}
           <div className="col-md-3 mb-4">
             <h5 className="fw-bold mb-3">Quick Links</h5>
             <ul className="list-unstyled">
@@ -58,7 +56,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* ================= CATEGORIES ================= */}
           <div className="col-md-3 mb-4">
             <h5 className="fw-bold mb-3">Categories</h5>
             <ul className="list-unstyled">
@@ -85,7 +82,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* ================= SOCIAL & NEWSLETTER ================= */}
           <div className="col-md-3 mb-4">
             <h5 className="fw-bold mb-3">Follow Us</h5>
             <div className="d-flex mb-3">
@@ -102,6 +98,7 @@ const Footer = () => {
                 <i className="bi bi-linkedin"></i>
               </a>
             </div>
+
             <h5 className="fw-bold mb-2">Subscribe</h5>
             <div className="input-group mb-2">
               <input
@@ -109,24 +106,34 @@ const Footer = () => {
                 className="form-control form-control-sm"
                 placeholder="Your email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                disabled={loading}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setMessage("");
+                }}
               />
               <button
                 className="btn btn-warning btn-sm"
                 type="button"
                 onClick={handleSubscribe}
-                disabled={loading}
               >
-                <i className="bi bi-envelope-fill"></i> {loading ? "Sending..." : "Subscribe"}
+                <i className="bi bi-envelope-fill"></i> Subscribe
               </button>
             </div>
-            {message && <small className="text-warning">{message}</small>}
-          </div>
 
+            {message && (
+              <small
+                className={
+                  message === "Subscribed successfully"
+                    ? "text-success"
+                    : "text-warning"
+                }
+              >
+                {message}
+              </small>
+            )}
+          </div>
         </div>
 
-        {/* ================= COPYRIGHT ================= */}
         <div className="text-center py-3 border-top border-secondary mt-4">
           <small>
             &copy; {new Date().getFullYear()} <strong>QuillHub</strong>. All rights reserved.
@@ -134,13 +141,13 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* ================= HOVER EFFECT ================= */}
       <style>
         {`
           a.text-light:hover {
             text-decoration: none;
             color: #ffc107 !important;
           }
+
           .btn-outline-light:hover {
             background-color: #ffc107 !important;
             color: #000 !important;
